@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -eu
+
 . ffbuild/config.sh
 
 if test "$shared" = "yes"; then

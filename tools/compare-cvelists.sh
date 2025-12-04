@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -eu
+
 wget -q -O cvelist-our-html https://git.ffmpeg.org/gitweb/ffmpeg-web.git/blob_plain/HEAD:/src/security
 wget -q -O cvelist-html     https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=ffmpeg
 

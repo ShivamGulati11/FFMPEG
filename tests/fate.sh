@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -eu
+
 config=$1
 
 die(){
@@ -9,7 +11,7 @@ die(){
 
 test -r "$config"  || die "usage: fate.sh <config>"
 
-workdir=$(cd $(dirname $config) && pwd)
+workdir=$(cd "$(dirname "$config")" && pwd)
 make=make
 tar='tar c'
 

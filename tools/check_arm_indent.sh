@@ -24,8 +24,9 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+set -eu
 
-cd $(dirname $0)/..
+cd "$(dirname "$0")/.."
 
 if [ "$1" = "--apply" ]; then
     apply=1

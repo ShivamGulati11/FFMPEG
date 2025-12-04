@@ -1,13 +1,16 @@
 # try to find an md5 program
+# Note: This file is sourced (not executed) by other scripts and should not 
+# use 'set -eu' because strict error handling in sourced files can cause the 
+# parent script to exit unexpectedly
 
 if [ X"$(echo | md5sum -b 2> /dev/null)" != X ]; then
-    do_md5sum() { md5sum -b $1; }
+    do_md5sum() { md5sum -b "$1"; }
 elif [ X"$(echo | command md5 2> /dev/null)" != X ]; then
-    do_md5sum() { command md5 $1 | sed 's#MD5 (\(.*\)) = \(.*\)#\2 *\1#'; }
+    do_md5sum() { command md5 "$1" | sed 's#MD5 (\(.*\)) = \(.*\)#\2 *\1#'; }
 elif [ -x /sbin/md5 ]; then
-    do_md5sum() { /sbin/md5 -r $1 | sed 's/\([0-9a-f]\) [ *]*/\1 */'; }
+    do_md5sum() { /sbin/md5 -r "$1" | sed 's/\([0-9a-f]\) [ *]*/\1 */'; }
 elif openssl version >/dev/null 2>&1; then
-    do_md5sum() { openssl md5 $1 | sed 's/MD5(\(.*\))= \(.*\)/\2 *\1/'; }
+    do_md5sum() { openssl md5 "$1" | sed 's/MD5(\(.*\))= \(.*\)/\2 *\1/'; }
 else
     do_md5sum() { echo No md5sum program found; }
 fi

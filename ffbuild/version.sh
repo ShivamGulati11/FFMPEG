@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -eu
+
 # Usage: version.sh <ffmpeg-root-dir> <output-version.h> <extra-version>
 
 # check for git short hash
