@@ -1,4 +1,7 @@
 #!/bin/sh
+
+set -eu
+
 toupper(){
     echo "$@" | tr abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ
 }
