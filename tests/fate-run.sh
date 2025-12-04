@@ -1,8 +1,10 @@
 #!/bin/sh
 
+set -eu
+
 export LC_ALL=C
 
-base=$(dirname $0)
+base=$(dirname "$0")
 . "${base}/md5.sh"
 
 base64=tests/base64${HOSTEXECSUF}

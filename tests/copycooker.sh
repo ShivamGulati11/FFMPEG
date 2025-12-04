@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -eu
+
 LC_ALL=C
 export LC_ALL
 
@@ -9,14 +11,14 @@ logfile="$datadir/copy.regression"
 reffile="$1"
 
 list=$(grep -oh ' ./tests/data/.*' tests/ref/{acodec,lavf,vsynth1}/*| sort)
-rm -f $logfile
+rm -f "$logfile"
 for i in $list ; do
-    echo ---------------- >> $logfile
-    echo $i >> $logfile
-    ./ffmpeg_g -flags +bitexact -i $i -acodec copy -vcodec copy -y first.nut
+    echo ---------------- >> "$logfile"
+    echo "$i" >> "$logfile"
+    ./ffmpeg_g -flags +bitexact -i "$i" -acodec copy -vcodec copy -y first.nut
     ./ffmpeg_g -flags +bitexact -i first.nut -acodec copy -vcodec copy -y second.nut
-    cmp first.nut second.nut >> $logfile
-    md5sum first.nut >> $logfile
+    cmp first.nut second.nut >> "$logfile"
+    md5sum first.nut >> "$logfile"
 done
 
 if diff -u -w "$reffile" "$logfile" ; then

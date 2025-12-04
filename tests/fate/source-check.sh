@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -eu
+
 cd "$1"/..
 
 git show > /dev/null 2> /dev/null || { cat tests/ref/fate/source ; exit 0; }
@@ -19,7 +21,7 @@ git grep -L -E "This file is part of FFmpeg|This file is part of libswresample|"
 
 echo Headers without standard inclusion guards:
 for f in `git ls-files | grep '\.h$'` ; do
-    macro="`echo $f | sed \
+    macro="`echo "$f" | sed \
         -e 's/^lib//' \
         -e 's/[^A-Za-z0-9]\{1,\}/_/g' \
         -e 's/_af_/_/' \
@@ -28,7 +30,7 @@ for f in `git ls-files | grep '\.h$'` ; do
         -e 's/_vaf_/_/' \
     | tr abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ`"
 
-    git grep -L "^#define $macro$" $f
+    git grep -L "^#define $macro$" "$f"
 done
 
 echo "Use of av_clip() where av_clip_uintp2() could be used:"
