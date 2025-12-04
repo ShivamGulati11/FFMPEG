@@ -45,8 +45,8 @@ esac
 
 
 target_path(){
-    test ${1} = ${1#/} && p=${target_path}/
-    echo ${p}${1}
+    test "${1}" = "${1#/}" && p="${target_path}/"
+    echo "${p}${1}"
 }
 
 # $1=value1, $2=value2, $3=threshold

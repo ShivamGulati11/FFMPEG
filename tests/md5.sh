@@ -1,4 +1,6 @@
 # try to find an md5 program
+# Note: This file is sourced by other scripts and should not use 'set -eu'
+# to avoid affecting the behavior of the sourcing script
 
 if [ X"$(echo | md5sum -b 2> /dev/null)" != X ]; then
     do_md5sum() { md5sum -b "$1"; }
