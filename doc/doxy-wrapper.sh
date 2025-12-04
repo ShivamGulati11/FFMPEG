@@ -17,6 +17,8 @@ else
     VERSION=`git describe`
 fi
 
+# Variables in heredoc are used for Doxygen config format, not shell expansion
+# $@ intentionally unquoted to expand to space-separated paths for INPUT field
 "${DOXYGEN}" - <<EOF
 @INCLUDE        = ${DOXYFILE}
 INPUT           = $@
